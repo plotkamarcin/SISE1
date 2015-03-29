@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -113,7 +114,7 @@ public class HeuristicFifteenPuzzleSolver {
 		
 		while (p.size() > 0) {
 			HeuristicFifteenPuzzle current = p.poll();
-			if (generated % 10 == 0) {
+			{
 				System.out.println("\n"+current);
 				System.out.println();
 
@@ -143,6 +144,11 @@ public class HeuristicFifteenPuzzleSolver {
 	public static void main(String[] args) {
 		FifteenPuzzle fp = new FifteenPuzzle();
 		fp.shuffle();
+		
+		Date now = new Date();
 		System.out.println("\n"+AStar(fp));
+		Date then = new Date();
+		
+		System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
 	}
 }
