@@ -1,4 +1,5 @@
 import java.util.Arrays;
+
 import java.util.Random;
 
 public class FifteenPuzzle {
@@ -9,8 +10,12 @@ public class FifteenPuzzle {
 	protected int myEmptyRow;
 	protected int myEmptyCol;
 	
+	protected static StringBuilder move = new StringBuilder();
+	protected static StringBuilder solution = new StringBuilder();
+	
 	// tworzy rozwiazanie.
 	FifteenPuzzle() {
+			
 		myBoard = new int[4][4];
 		int count = 1;
 		for (int r = 0 ; r < 4 ; ++r) {
@@ -62,7 +67,7 @@ public class FifteenPuzzle {
 			myBoard[myEmptyRow][myEmptyCol] = myBoard[myEmptyRow-1][myEmptyCol];
 			myBoard[myEmptyRow-1][myEmptyCol] = a;
 			myEmptyRow--;
-			System.out.print(" U");
+			move.append(" U");
 			return true;
 		}
 		// w prawo
@@ -71,7 +76,7 @@ public class FifteenPuzzle {
 			myBoard[myEmptyRow][myEmptyCol] = myBoard[myEmptyRow][myEmptyCol+1];
 			myBoard[myEmptyRow][myEmptyCol+1] = a;
 			myEmptyCol++;
-			System.out.print(" R");
+			move.append(" R");
 			return true;
 		}
 		// w dol
@@ -80,7 +85,7 @@ public class FifteenPuzzle {
 			myBoard[myEmptyRow][myEmptyCol] = myBoard[myEmptyRow+1][myEmptyCol];
 			myBoard[myEmptyRow+1][myEmptyCol] = a;
 			myEmptyRow++;
-			System.out.print(" D");
+			move.append(" D");
 			return true;
 		}
 		// w lewo
@@ -89,7 +94,7 @@ public class FifteenPuzzle {
 			myBoard[myEmptyRow][myEmptyCol] = myBoard[myEmptyRow][myEmptyCol-1];
 			myBoard[myEmptyRow][myEmptyCol-1] = a;
 			myEmptyCol--;
-			System.out.print(" L");
+			move.append(" L");
 			return true;
 		}
 		return false;
@@ -101,6 +106,28 @@ public class FifteenPuzzle {
 		for (int i = 0 ; i < 100 ; ++i) {
 			move(r.nextInt(4));
 		}
+	}
+	
+	void setFixedTableForTest(){
+        myBoard[0][0]=1;
+        myBoard[0][1]=2;
+        myBoard[0][2]=3;
+        myBoard[0][3]=4;
+        myBoard[1][0]=5;
+        myBoard[1][1]=6;
+        myBoard[1][2]=7;
+        myBoard[1][3]=0;
+        myBoard[2][0]=8;
+        myBoard[2][1]=9;
+        myBoard[2][2]=10;
+        myBoard[2][3]=11;
+        myBoard[3][0]=12;
+        myBoard[3][1]=13;
+        myBoard[3][2]=14;
+        myBoard[3][3]=15;
+
+		myEmptyCol=3;
+		myEmptyRow=1;
 	}
 	
 	//kopiuje tablice

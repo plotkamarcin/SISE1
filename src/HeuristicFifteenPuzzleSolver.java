@@ -21,16 +21,16 @@ public class HeuristicFifteenPuzzleSolver {
 		HashSet<FifteenPuzzle> visited = new HashSet<FifteenPuzzle>();
 		
 		//stos do tablic
-		Stack<FifteenPuzzle> s = new Stack<FifteenPuzzle>();
-		s.push(fp);
+		Stack<FifteenPuzzle> stree = new Stack<FifteenPuzzle>();
+		stree.push(fp);
 		
-		while (s.size() > 0) 
+		while (stree.size() > 0) 
 		{
-			FifteenPuzzle current = s.pop();
+			FifteenPuzzle current = stree.pop();
 			if (generated % 100000 == 0) {
 				System.out.println(current);
 				System.out.println("Wygenerowano: " + generated + 
-						           " Rozmiar stosu: " + s.size() + 
+						           " Rozmiar stosu: " + stree.size() + 
 					               " Odwiedzono: " + visited.size());
 			}
 			if (current.equals(solution)) {
@@ -45,7 +45,7 @@ public class HeuristicFifteenPuzzleSolver {
 				generated++;
 				if (!visited.contains(moved)) {
 					visited.add(moved);
-					s.push(moved);
+					stree.push(moved);
 				}
 			}
 		}
@@ -55,7 +55,7 @@ public class HeuristicFifteenPuzzleSolver {
 	//Rozwiazuje 15 BFSem i drukuje rozwiazanie po kazdym zdjeciu ze stosu
 	
 	public static FifteenPuzzle BFS(FifteenPuzzle fp) {
-		// Count how many boards we've created.
+
 				int generated = 0;
 				
 		// rozwiazanie
@@ -65,16 +65,16 @@ public class HeuristicFifteenPuzzleSolver {
 				HashSet<FifteenPuzzle> visited = new HashSet<FifteenPuzzle>();
 		
 		//zmieniamy na kolejke 
-				Queue<FifteenPuzzle> s = new LinkedList<FifteenPuzzle>();
-				s.add(fp);
+				Queue<FifteenPuzzle> qtree = new LinkedList<FifteenPuzzle>();
+				qtree.add(fp);
 				
-				while (s.size() > 0) 
+				while (qtree.size() > 0) 
 				{
-					FifteenPuzzle current = s.poll();
+					FifteenPuzzle current = qtree.poll();
 					if (generated % 100000 == 0) {
 						System.out.println(current);
 						System.out.println("Wygenerowano: " + generated + 
-						           " Rozmiar stosu: " + s.size() + 
+						           " Rozmiar stosu: " + qtree.size() + 
 					               " Odwiedzono: " + visited.size());
 					}
 					if (current.equals(solution)) {
@@ -88,7 +88,7 @@ public class HeuristicFifteenPuzzleSolver {
 						generated++;
 						if (!visited.contains(moved)) {
 							visited.add(moved);
-							s.add(moved);
+							qtree.add(moved);
 						}
 					}
 				}
@@ -109,41 +109,53 @@ public class HeuristicFifteenPuzzleSolver {
 		HashSet<FifteenPuzzle> visited = new HashSet<FifteenPuzzle>();
 		
 		//wykorzystujemy kolejke priorytetowa i heurystyke
-		PriorityQueue<HeuristicFifteenPuzzle> p = new PriorityQueue<HeuristicFifteenPuzzle>();
-		p.add(new HeuristicFifteenPuzzle(fp));
+		PriorityQueue<HeuristicFifteenPuzzle> ptree = new PriorityQueue<HeuristicFifteenPuzzle>();
+		ptree.add(new HeuristicFifteenPuzzle(fp));
 		
-		while (p.size() > 0) {
-			HeuristicFifteenPuzzle current = p.poll();
+		while (ptree.size() > 0) {
+			HeuristicFifteenPuzzle current = ptree.poll();
 			{
 				System.out.println("\n"+current);
 				System.out.println();
-
 				System.out.println("Wygenerowano: " + generated + 
-				           " Rozmiar stosu: " + p.size() + 
+				           " Rozmiar stosu: " + ptree.size() + 
 			               " Odwiedzono: " + visited.size());
+				
 			}
 			
 			if (current.equals(solution)) {
+				System.out.println(FifteenPuzzle.solution);
 				return current;
+				
 			}
-			for (int i = 0 ; i < 4 ; ++i) {
+			for (int i = 0 ; i < 4 ; ++i) 
+			{
 				HeuristicFifteenPuzzle moved = current.clone();
-				if (!moved.move(i))  
+				
+				if (!moved.move(i)) {	
+					FifteenPuzzle.solution.append(FifteenPuzzle.move.charAt(FifteenPuzzle.move.length()-1)+" ");
 					continue;
+				}
 				generated++;
-				if (!visited.contains(moved)) {
+				
+				if (!visited.contains(moved)) {					
 					visited.add(moved);
-					p.add(moved);
+					ptree.add(moved);
+					
 				}
 			}
+			
 		}
 		return null;
 	}
 	
+	public String moves = null;
+	
 	// FUNKCJA MAIN
 	public static void main(String[] args) {
 		FifteenPuzzle fp = new FifteenPuzzle();
-		fp.shuffle();
+	    fp.shuffle();
+		//fp.setFixedTableForTest();
 		
 		Date now = new Date();
 		System.out.println("\n"+AStar(fp));
