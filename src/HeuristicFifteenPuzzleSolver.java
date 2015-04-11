@@ -187,7 +187,7 @@ public class HeuristicFifteenPuzzleSolver {
 	    }
 		else
 		{
-			System.out.println("zly argument! uzyj astar, bfs lub dfs");
+			System.out.println("zly argument! uzyj astar, bfs, dfs lub file nazwa_pliku");
 		}
 				
 		

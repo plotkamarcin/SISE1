@@ -134,16 +134,18 @@ public class FifteenPuzzle {
 	//wczytaj z pliku
 	public void loadFromFile(String filename){
 		try {
-			Scanner file = new Scanner(new File(filename));
+			File file = new File(filename);
+			Scanner fileScanner = new Scanner(file);
 				
-			while(file.hasNext()!=false){
+			System.out.println("Wczytano: "+file.getAbsolutePath());
+			while(fileScanner.hasNext()!=false){
 			for (int r = 0 ; r < 4 ; ++r) {
 				for (int c = 0 ; c < 4 ; ++c) {
-					myBoard[r][c] = file.nextInt();
+					myBoard[r][c] = fileScanner.nextInt();
 				}
 			}
 			}
-			file.close();
+			fileScanner.close();
 		} 
 		catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
