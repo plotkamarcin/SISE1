@@ -156,11 +156,40 @@ public class HeuristicFifteenPuzzleSolver {
 		FifteenPuzzle fp = new FifteenPuzzle();
 	    fp.shuffle();
 		//fp.setFixedTableForTest();
-		
+	    
+	    if(args.length==0){
+	    	System.out.println("podaj argument uruchomienia! uzyj astar, bfs lub dfs");
+	    }
+	    else if(args[0].equals("astar")){
 		Date now = new Date();
 		System.out.println("\n"+AStar(fp));
 		Date then = new Date();
-		
 		System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
+		}
+	    else if(args[0].equals("dfs")){
+		Date now = new Date();
+		System.out.println("\n"+DFS(fp));
+		Date then = new Date();
+		System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
+		}
+	    else if(args[0].equals("bfs")){
+		Date now = new Date();
+		System.out.println("\n"+BFS(fp));
+		Date then = new Date();
+		System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
+		}
+	    else if(args[0].equals("file")&&args[1].length()!=0){
+	    	fp.loadFromFile(args[1]);
+	    	Date now = new Date();
+			System.out.println("\n"+AStar(fp));
+			Date then = new Date();
+			System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
+	    }
+		else
+		{
+			System.out.println("zly argument! uzyj astar, bfs lub dfs");
+		}
+				
+		
 	}
 }

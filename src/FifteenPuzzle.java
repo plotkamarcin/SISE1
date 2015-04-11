@@ -1,6 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
-
 import java.util.Random;
+import java.util.Scanner;
 
 public class FifteenPuzzle {
 	
@@ -128,6 +130,26 @@ public class FifteenPuzzle {
 
 		myEmptyCol=3;
 		myEmptyRow=1;
+	}
+	//wczytaj z pliku
+	public void loadFromFile(String filename){
+		try {
+			Scanner file = new Scanner(new File(filename));
+				
+			while(file.hasNext()!=false){
+			for (int r = 0 ; r < 4 ; ++r) {
+				for (int c = 0 ; c < 4 ; ++c) {
+					myBoard[r][c] = file.nextInt();
+				}
+			}
+			}
+			file.close();
+		} 
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	//kopiuje tablice
