@@ -124,7 +124,8 @@ public class HeuristicFifteenPuzzleSolver {
 			}
 			
 			if (current.equals(solution)) {
-				System.out.println(FifteenPuzzle.solution);
+				System.out.println("Wykonane proby:\n"+FifteenPuzzle.move);
+				System.out.println("Rozwiazanie:\n"+FifteenPuzzle.solution);
 				return current;
 				
 			}
@@ -134,6 +135,7 @@ public class HeuristicFifteenPuzzleSolver {
 				
 				if (!moved.move(i)) {	
 					FifteenPuzzle.solution.append(FifteenPuzzle.move.charAt(FifteenPuzzle.move.length()-1)+" ");
+					FifteenPuzzle.move.deleteCharAt(FifteenPuzzle.move.length()-1);
 					continue;
 				}
 				generated++;
@@ -179,7 +181,8 @@ public class HeuristicFifteenPuzzleSolver {
 		System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
 		}
 	    else if(args[0].equals("file")&&args[1].length()!=0){
-	    	fp.loadFromFile(args[1]);
+	    	//fp.loadFromFile(args[1]);
+	    	fp.shuffle();
 	    	Date now = new Date();
 			System.out.println("\n"+AStar(fp));
 			Date then = new Date();

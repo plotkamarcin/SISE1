@@ -14,7 +14,7 @@ public class FifteenPuzzle {
 	
 	protected static StringBuilder move = new StringBuilder();
 	protected static StringBuilder solution = new StringBuilder();
-	
+	private int seed = (int)System.currentTimeMillis();
 	// tworzy rozwiazanie.
 	FifteenPuzzle() {
 			
@@ -104,10 +104,11 @@ public class FifteenPuzzle {
 	// miesza tablice
 	
 	void shuffle() {
-		Random r = new Random(0);
+		Random r = new Random();
 		for (int i = 0 ; i < 100 ; ++i) {
 			move(r.nextInt(4));
 		}
+		move.setLength(0); //zeruje ruchy po przemieszaniu
 	}
 	
 	void setFixedTableForTest(){
