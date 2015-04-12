@@ -183,6 +183,7 @@ public class HeuristicFifteenPuzzleSolver {
 	    else if(args[0].equals("file")&&args[1].length()!=0){
 	    	//fp.loadFromFile(args[1]);
 	    	fp.shuffle();
+	    	fp.checkWhereIsZeroElement();	    	
 	    	Date now = new Date();
 			System.out.println("\n"+AStar(fp));
 			Date then = new Date();

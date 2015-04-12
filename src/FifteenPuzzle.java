@@ -132,6 +132,21 @@ public class FifteenPuzzle {
 		myEmptyCol=3;
 		myEmptyRow=1;
 	}
+	//sprawdz gdzie jest zero
+	public void checkWhereIsZeroElement(){
+		for (int r = 0 ; r < 4 ; ++r) {
+			for (int c = 0 ; c < 4 ; ++c) {
+				if(myBoard[r][c] ==0){
+					myEmptyCol=c;
+					myEmptyRow=r;
+				}
+				
+			}
+		}
+		
+	}
+	
+	
 	//wczytaj z pliku
 	public void loadFromFile(String filename){
 		try {
