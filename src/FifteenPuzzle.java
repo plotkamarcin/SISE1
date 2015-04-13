@@ -104,7 +104,7 @@ public class FifteenPuzzle {
 	// miesza tablice
 	
 	void shuffle() {
-		Random r = new Random();
+		Random r = new Random(System.currentTimeMillis());
 		for (int i = 0 ; i < 100 ; ++i) {
 			move(r.nextInt(4));
 		}

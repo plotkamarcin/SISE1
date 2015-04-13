@@ -10,7 +10,7 @@ public class HeuristicFifteenPuzzleSolver {
 	//Rozwiazuje 15 DFSem i drukuje rozwiazanie po kazdym zdjeciu ze stosu
 
 	public static FifteenPuzzle DFS(FifteenPuzzle fp) {
-		
+		FifteenPuzzle.move.append("   ");
 		// licznik ile mamy tablic do gry
 		int generated = 0;
 		
@@ -27,7 +27,7 @@ public class HeuristicFifteenPuzzleSolver {
 		while (stree.size() > 0) 
 		{
 			FifteenPuzzle current = stree.pop();
-			if (generated % 100000 == 0) {
+			if (generated % 10000 == 0) {
 				System.out.println(current);
 				System.out.println("Wygenerowano: " + generated + 
 						           " Rozmiar stosu: " + stree.size() + 
@@ -55,7 +55,7 @@ public class HeuristicFifteenPuzzleSolver {
 	//Rozwiazuje 15 BFSem i drukuje rozwiazanie po kazdym zdjeciu ze stosu
 	
 	public static FifteenPuzzle BFS(FifteenPuzzle fp) {
-
+		FifteenPuzzle.move.append("   ");
 				int generated = 0;
 				
 		// rozwiazanie
@@ -71,7 +71,7 @@ public class HeuristicFifteenPuzzleSolver {
 				while (qtree.size() > 0) 
 				{
 					FifteenPuzzle current = qtree.poll();
-					if (generated % 100000 == 0) {
+					if (generated % 10000 == 0) {
 						System.out.println(current);
 						System.out.println("Wygenerowano: " + generated + 
 						           " Rozmiar stosu: " + qtree.size() + 
@@ -97,6 +97,7 @@ public class HeuristicFifteenPuzzleSolver {
 	
 	public static FifteenPuzzle AStar(FifteenPuzzle fp) {
 		
+		FifteenPuzzle.move.append("   ");
 		// licznik ile mamy tablic do gry
 		
 		int generated = 0;
@@ -143,7 +144,6 @@ public class HeuristicFifteenPuzzleSolver {
 				if (!visited.contains(moved)) {					
 					visited.add(moved);
 					ptree.add(moved);
-					
 				}
 			}
 			
@@ -156,38 +156,42 @@ public class HeuristicFifteenPuzzleSolver {
 	// FUNKCJA MAIN
 	public static void main(String[] args) {
 		FifteenPuzzle fp = new FifteenPuzzle();
-	    fp.shuffle();
 		//fp.setFixedTableForTest();
 	    
 	    if(args.length==0){
 	    	System.out.println("podaj argument uruchomienia! uzyj astar, bfs lub dfs");
 	    }
 	    else if(args[0].equals("astar")){
-		Date now = new Date();
-		System.out.println("\n"+AStar(fp));
-		Date then = new Date();
-		System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
+	    	fp.shuffle();
+	    	fp.checkWhereIsZeroElement();
+	    	Date now = new Date();
+	    	System.out.println("\n"+AStar(fp));
+	    	Date then = new Date();
+	    	System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
 		}
 	    else if(args[0].equals("dfs")){
-		Date now = new Date();
-		System.out.println("\n"+DFS(fp));
-		Date then = new Date();
-		System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
+	    	fp.shuffle();
+	    	fp.checkWhereIsZeroElement();
+	    	long now = System.currentTimeMillis();
+	    	System.out.println("\n"+DFS(fp));
+	    	long then = System.currentTimeMillis();
+	    	System.out.println("Czas wykonania : "+(then-now));
 		}
 	    else if(args[0].equals("bfs")){
-		Date now = new Date();
-		System.out.println("\n"+BFS(fp));
-		Date then = new Date();
-		System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
+	    	fp.shuffle();
+	    	fp.checkWhereIsZeroElement();
+	    	long now = System.currentTimeMillis();
+	    	System.out.println("\n"+BFS(fp));
+	    	long then = System.currentTimeMillis();
+	    	System.out.println("Czas wykonania : "+(then-now));
 		}
 	    else if(args[0].equals("file")&&args[1].length()!=0){
-	    	//fp.loadFromFile(args[1]);
-	    	fp.shuffle();
+	    	fp.loadFromFile(args[1]);
 	    	fp.checkWhereIsZeroElement();	    	
-	    	Date now = new Date();
-			System.out.println("\n"+AStar(fp));
-			Date then = new Date();
-			System.out.println("Czas wykonania : "+(then.getTime()-now.getTime()));
+	    	long now = System.currentTimeMillis();
+	    	System.out.println("\n"+AStar(fp));
+	    	long then = System.currentTimeMillis();
+			System.out.println("Czas wykonania : "+(then-now));
 	    }
 		else
 		{
